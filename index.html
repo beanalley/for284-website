@@ -839,6 +839,181 @@
       line-height: 1.5;
     }
 
+    /* ── PHOTOS ── */
+    #photos {
+      background: var(--bark);
+      padding: 7rem 3rem;
+      overflow: hidden;
+    }
+
+    .photos-inner { max-width: 1280px; margin: 0 auto; }
+
+    .photos-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: end;
+      margin-bottom: 4rem;
+    }
+
+    .photos-header .section-label { color: var(--copper-lt); }
+    .photos-header .section-label::after { background: var(--copper-lt); }
+
+    .photos-header p {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.72;
+      font-weight: 300;
+      align-self: end;
+    }
+
+    .photos-album-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--copper-lt);
+      font-weight: 500;
+      margin-bottom: 1.2rem;
+      margin-top: 3rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .photos-album-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(255,255,255,0.08);
+    }
+
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+    }
+
+    .photo-grid.historical { grid-template-columns: repeat(3, 1fr); }
+
+    .photo-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 3px;
+      aspect-ratio: 4/3;
+      cursor: pointer;
+      background: rgba(255,255,255,0.04);
+    }
+
+    .photo-item.tall { grid-row: span 2; aspect-ratio: unset; }
+
+    .photo-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease, filter 0.3s ease;
+      filter: brightness(0.85);
+    }
+
+    .photo-item:hover img {
+      transform: scale(1.04);
+      filter: brightness(1);
+    }
+
+    .photo-caption {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 0.6rem 0.8rem;
+      background: linear-gradient(transparent, rgba(0,0,0,0.65));
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.75);
+      opacity: 0;
+      transition: opacity 0.25s;
+      line-height: 1.3;
+    }
+
+    .photo-item:hover .photo-caption { opacity: 1; }
+
+    /* ── BOARD ── */
+    #board {
+      background: var(--cream);
+      padding: 7rem 3rem;
+    }
+
+    .board-inner { max-width: 1280px; margin: 0 auto; }
+
+    .board-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: end;
+      margin-bottom: 4rem;
+    }
+
+    .board-header p {
+      font-size: 1rem;
+      color: #666;
+      line-height: 1.72;
+      font-weight: 300;
+      align-self: end;
+    }
+
+    .board-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .board-card {
+      background: #fff;
+      border: 1px solid var(--mist);
+      border-radius: 6px;
+      padding: 1.8rem;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+
+    .board-card:hover {
+      box-shadow: 0 6px 24px rgba(0,0,0,0.07);
+      transform: translateY(-2px);
+    }
+
+    .board-initials {
+      width: 48px; height: 48px;
+      background: var(--forest);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 1.2rem;
+      letter-spacing: 0.02em;
+    }
+
+    .board-card.officer .board-initials {
+      background: var(--copper);
+    }
+
+    .board-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--forest);
+      margin-bottom: 0.25rem;
+      line-height: 1.2;
+    }
+
+    .board-role {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--copper);
+      font-weight: 500;
+    }
+
+    .board-card.voting .board-role { color: var(--sage); }
+
     /* ── FOOTER ── */
     footer {
       background: var(--bark);
@@ -913,6 +1088,13 @@
       #mission { padding: 4rem 1.5rem; }
       .mission-top { grid-template-columns: 1fr; gap: 2.5rem; }
       .bsa-strip { grid-template-columns: 1fr; gap: 2rem; padding: 2rem; }
+      #photos { padding: 4rem 1.5rem; }
+      .photos-header { grid-template-columns: 1fr; gap: 1.5rem; }
+      .photo-grid { grid-template-columns: repeat(2, 1fr); }
+      .photo-item.tall { grid-row: span 1; aspect-ratio: 4/3; }
+      #board { padding: 4rem 1.5rem; }
+      .board-header { grid-template-columns: 1fr; gap: 1.5rem; }
+      .board-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
       #donate { padding: 4rem 1.5rem; }
       .donate-inner { grid-template-columns: 1fr; gap: 3rem; }
       footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem; }
@@ -933,7 +1115,9 @@
     <ul class="nav-links">
       <li><a onclick="goTo('welcome')" class="active" id="nav-welcome">Welcome</a></li>
       <li><a onclick="goTo('history')" id="nav-history">History</a></li>
+      <li><a onclick="goTo('photos')" id="nav-photos">Photos</a></li>
       <li><a onclick="goTo('mission')" id="nav-mission">Mission</a></li>
+      <li><a onclick="goTo('board')" id="nav-board">Board</a></li>
       <li><a onclick="goTo('donate')" class="nav-donate" id="nav-donate">Donate</a></li>
     </ul>
   </nav>
@@ -1105,6 +1289,91 @@
     </div>
   </section>
 
+  <!-- PHOTOS -->
+  <section id="photos">
+    <div class="photos-inner">
+      <div class="photos-header reveal">
+        <div>
+          <p class="section-label" style="color:var(--copper-lt)">Photo Albums</p>
+          <h2 class="section-title light">The Cabin,<br><em>then and now.</em></h2>
+        </div>
+        <p>From a 19th-century one-room schoolhouse to a fully renovated Scout home — these photos document the history and transformation of The Cabin at Darby-Paoli and Godfrey Roads.</p>
+      </div>
+
+      <p class="photos-album-label reveal">Cabin Historical Photos</p>
+      <div class="photo-grid historical reveal">
+        <div class="photo-item tall">
+          <img src="https://myfunrun.nyc3.cdn.digitaloceanspaces.com/assets/site/album/2803/-2803.758be714-4e34-479b-8e0f-acabe18968f3.jpg" alt="Radnor Township School #7" loading="lazy">
+          <div class="photo-caption">Radnor Township School #7 — the original schoolhouse</div>
+        </div>
+        <div class="photo-item">
+          <img src="https://myfunrun.nyc3.cdn.digitaloceanspaces.com/assets/site/album/2803/-2803.93acecea-74ab-4b51-b1e5-f9d92da1a2de.jpg" alt="Historical photo" loading="lazy">
+          <div class="photo-caption">Historical record</div>
+        </div>
+        <div class="photo-item">
+          <img src="https://myfunrun.nyc3.cdn.digitaloceanspaces.com/assets/site/album/2803/-2803.9504ea96-aa8f-4446-bbab-719eecb833ee.jpg" alt="Historical photo" loading="lazy">
+          <div class="photo-caption">Historical record</div>
+        </div>
+        <div class="photo-item">
+          <img src="https://myfunrun.nyc3.cdn.digitaloceanspaces.com/assets/site/album/2803/-2803.9a67c4a4-f9bf-4706-b84d-ba0da9547918.jpg" alt="Historical photo" loading="lazy">
+          <div class="photo-caption">Historical record</div>
+        </div>
+      </div>
+
+      <p class="photos-album-label reveal">Cabin Construction &amp; Renovation</p>
+      <div class="photo-grid reveal">
+        <div class="photo-item">
+          <img src="https://myfunrun.nyc3.cdn.digitaloceanspaces.com/assets/site/album/2801/-2801.38f2f7b6-acaf-4fc5-a57c-c006c47b161d.jpg" alt="Preconstruction" loading="lazy">
+          <div class="photo-caption">Preconstruction</div>
+        </div>
+        <div class="photo-item">
+          <img src="https://myfunrun.nyc3.cdn.digitaloceanspaces.com/assets/site/album/2801/-2801.8e5a45e1-61ac-41e7-87f5-842f53d170ce.jpg" alt="Pre-construction" loading="lazy">
+          <div class="photo-caption">Pre-construction</div>
+        </div>
+        <div class="photo-item">
+          <img src="https://myfunrun.nyc3.cdn.digitaloceanspaces.com/assets/site/album/2801/-2801.84ec54d9-5ff5-437c-8c9b-777153176c0c.jpg" alt="Outside entrance to basement from inside, basement has been dug out." loading="lazy">
+          <div class="photo-caption">Basement excavated — new flexible meeting space</div>
+        </div>
+        <div class="photo-item">
+          <img src="https://myfunrun.nyc3.cdn.digitaloceanspaces.com/assets/site/album/2801/-2801.acf3920f-aa09-4378-bc00-ff5e677cdee9.jpg" alt="New outside entrance to basement stairs formed up." loading="lazy">
+          <div class="photo-caption">New Bilco door entrance to basement</div>
+        </div>
+        <div class="photo-item">
+          <img src="https://myfunrun.nyc3.cdn.digitaloceanspaces.com/assets/site/album/2801/-2801.d49b15b6-7490-4f90-888d-c6a12ef228e0.jpg" alt="Footers being poured" loading="lazy">
+          <div class="photo-caption">Footers being poured</div>
+        </div>
+        <div class="photo-item">
+          <img src="https://myfunrun.nyc3.cdn.digitaloceanspaces.com/assets/site/album/2801/-2801.4faac832-19be-4119-8b01-c5469b52fefd.jpg" alt="Porch and Quartermaster's Shed" loading="lazy">
+          <div class="photo-caption">New porch &amp; Quartermaster's Shed</div>
+        </div>
+        <div class="photo-item">
+          <img src="https://myfunrun.nyc3.cdn.digitaloceanspaces.com/assets/site/album/2801/-2801.04c69bf8-645d-4423-92bb-31d2fc86bb61.jpg" alt="QM shed progress" loading="lazy">
+          <div class="photo-caption">QM shed in progress</div>
+        </div>
+        <div class="photo-item">
+          <img src="https://myfunrun.nyc3.cdn.digitaloceanspaces.com/assets/site/album/2801/-2801.6d0529db-9ce0-464a-a85f-615f8ae69b27.jpg" alt="New outside entrance to basement" loading="lazy">
+          <div class="photo-caption">New outside entrance to basement</div>
+        </div>
+      </div>
+
+      <p class="photos-album-label reveal">Views We Never Had Before</p>
+      <div class="photo-grid historical reveal">
+        <div class="photo-item">
+          <img src="https://myfunrun.nyc3.cdn.digitaloceanspaces.com/assets/site/album/2802/-2802.a95af2a1-6ae2-45e6-9c12-c790a396daf7.jpg" alt="Aerial view" loading="lazy">
+          <div class="photo-caption">Views we never had before</div>
+        </div>
+        <div class="photo-item">
+          <img src="https://myfunrun.nyc3.cdn.digitaloceanspaces.com/assets/site/album/2802/-2802.e51dd97c-0cf4-46ab-8da1-e7f26d19e21a.jpg" alt="Aerial view" loading="lazy">
+          <div class="photo-caption">Views we never had before</div>
+        </div>
+        <div class="photo-item">
+          <img src="https://myfunrun.nyc3.cdn.digitaloceanspaces.com/assets/site/album/2802/-2802.b1150dda-351a-4651-8056-f94c6f9345d8.jpg" alt="Aerial view" loading="lazy">
+          <div class="photo-caption">Views we never had before</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- MISSION -->
   <section id="mission">
     <div class="mission-inner">
@@ -1188,6 +1457,42 @@
     </div>
   </section>
 
+  <!-- BOARD -->
+  <section id="board">
+    <div class="board-inner">
+      <div class="board-header reveal">
+        <div>
+          <p class="section-label">Leadership</p>
+          <h2 class="section-title">Board of<br><em>Directors.</em></h2>
+        </div>
+        <p>Friends of Radnor 284 is governed by a volunteer board of officers and voting members drawn from the Radnor Township community — alumni, parents, and neighbors who share a commitment to Scouting and open space.</p>
+      </div>
+
+      <div class="board-grid reveal">
+        <div class="board-card officer">
+          <div class="board-initials">CP</div>
+          <p class="board-name">Dr. Clarke Piatt</p>
+          <p class="board-role">Board Member</p>
+        </div>
+        <div class="board-card officer">
+          <div class="board-initials">M</div>
+          <p class="board-name">Marc</p>
+          <p class="board-role">Secretary</p>
+        </div>
+        <div class="board-card voting">
+          <div class="board-initials">TS</div>
+          <p class="board-name">Troy Schrader</p>
+          <p class="board-role">Voting Member</p>
+        </div>
+        <div class="board-card voting">
+          <div class="board-initials">SC</div>
+          <p class="board-name">Sarah Connelly</p>
+          <p class="board-role">Voting Member</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- DONATE -->
   <section id="donate">
     <div class="donate-inner">
@@ -1244,7 +1549,9 @@
     <ul class="footer-nav">
       <li><a onclick="goTo('welcome')">Welcome</a></li>
       <li><a onclick="goTo('history')">History</a></li>
+      <li><a onclick="goTo('photos')">Photos</a></li>
       <li><a onclick="goTo('mission')">Mission</a></li>
+      <li><a onclick="goTo('board')">Board</a></li>
       <li><a onclick="goTo('donate')">Donate</a></li>
     </ul>
     <span class="footer-copy">501(c)(3) · Wayne, PA 19087</span>
@@ -1265,7 +1572,7 @@
     };
 
     // Active nav link on scroll
-    const sections = ['welcome', 'history', 'mission', 'donate'];
+    const sections = ['welcome', 'history', 'photos', 'mission', 'board', 'donate'];
     const navLinks = sections.map(id => document.getElementById('nav-' + id));
     const sectionEls = sections.map(id => document.getElementById(id));
 
