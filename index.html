@@ -426,6 +426,69 @@
       font-weight: 500;
     }
 
+    .welcome-cabin-photo {
+      width: 100%;
+      border-radius: 6px;
+      overflow: hidden;
+      aspect-ratio: 4/3;
+      margin-bottom: 1.8rem;
+      position: relative;
+    }
+
+    .welcome-cabin-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+
+    .welcome-cabin-photo:hover img { transform: scale(1.03); }
+
+    .affiliated-units {
+      margin-top: 2rem;
+      padding-top: 1.8rem;
+      border-top: 1px solid var(--mist);
+    }
+
+    .affiliated-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #999;
+      font-weight: 500;
+      margin-bottom: 0.9rem;
+    }
+
+    .unit-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .unit-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+      color: var(--forest);
+      font-size: 0.92rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .unit-link::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      background: var(--copper);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .unit-link:hover { color: var(--copper); }
+
     /* ── HISTORY ── */
     #history {
       background: var(--forest);
@@ -1166,6 +1229,9 @@
       </div>
     </div>
     <div class="welcome-right reveal">
+      <div class="welcome-cabin-photo">
+        <img src="https://myfunrun.nyc3.cdn.digitaloceanspaces.com/assets/site/album/2801/-2801.4faac832-19be-4119-8b01-c5469b52fefd.jpg" alt="The Cabin — renovated exterior with new porch and Quartermaster's Shed" loading="lazy">
+      </div>
       <p>
         Friends of Radnor 284, Inc. exists to champion two things that define this community:
         <strong>Scouting and open space.</strong> Together, they shape young lives and preserve
@@ -1189,6 +1255,13 @@
           regardless of geographic or ethnic origin, sexual orientation, religious affiliation,
           age, income level, or special needs.
         </p>
+      </div>
+      <div class="affiliated-units">
+        <p class="affiliated-label">Affiliated Scouting Units</p>
+        <div class="unit-links">
+          <a class="unit-link" href="https://bsa284.org/" target="_blank" rel="noopener">Radnor Troop 284</a>
+          <a class="unit-link" href="https://284g.trooptrack.com/" target="_blank" rel="noopener">Radnor Trailblazers</a>
+        </div>
       </div>
     </div>
   </section>
