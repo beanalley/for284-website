@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Friends of Radnor 284</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --forest:   #1b3629;
+      --forest-lt: #2a5040;
+      --stone:    #f2ebe0;
+      --copper:   #b8621e;
+      --copper-lt:#d4844a;
+      --bark:     #3c2a18;
+      --sage:     #6a8f6b;
+      --cream:    #faf6ef;
+      --ink:      #1a1a18;
+      --mist:     #ddd8ce;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    /* ── GRAIN OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.028;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* ── NAVIGATION ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 0 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+      transition: background 0.4s, backdrop-filter 0.4s, box-shadow 0.4s;
+    }
+
+    nav.scrolled {
+      background: rgba(27, 54, 41, 0.96);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 1px 0 rgba(255,255,255,0.08);
+    }
+
+    .nav-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      font-size: 1.35rem;
+      color: #fff;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .nav-brand span {
+      display: inline-block;
+      width: 32px; height: 32px;
+      background: var(--copper);
+      color: #fff;
+      font-size: 0.9rem;
+      font-weight: 700;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      letter-spacing: 0;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 400;
+      transition: color 0.2s;
+      cursor: pointer;
+    }
+
+    .nav-links a:hover { color: #fff; }
+    .nav-links a.active { color: var(--copper-lt); }
+
+    .nav-donate {
+      background: var(--copper);
+      color: #fff !important;
+      padding: 0.45em 1.2em;
+      border-radius: 3px;
+      transition: background 0.2s !important;
+    }
+    .nav-donate:hover { background: var(--copper-lt) !important; color: #fff !important; }
+
+    /* ── HERO ── */
+    #hero {
+      position: relative;
+      height: 100vh;
+      min-height: 640px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to bottom, rgba(15,30,22,0.3) 0%, rgba(15,30,22,0.75) 100%),
+        url('https://for284.org/files/editor/image/for284/for284-banner.jpg') center/cover no-repeat;
+    }
+
+    /* Fallback if the image above doesn't work */
+    .hero-bg-fallback {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(145deg, #1b3629 0%, #2a4a35 40%, #1a2e20 100%);
+    }
+
+    .hero-number {
+      position: absolute;
+      right: -0.02em;
+      bottom: -0.1em;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(18rem, 28vw, 38rem);
+      font-weight: 700;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(255,255,255,0.1);
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+      letter-spacing: -0.04em;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 0 3rem 5rem;
+      max-width: 760px;
+      animation: heroIn 1.2s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    @keyframes heroIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--copper-lt);
+      margin-bottom: 1.2rem;
+      font-weight: 500;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 1px;
+      background: var(--copper-lt);
+    }
+
+    h1.hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.2rem, 6vw, 6.5rem);
+      font-weight: 500;
+      color: #fff;
+      line-height: 1.05;
+      margin-bottom: 1.6rem;
+      letter-spacing: -0.01em;
+    }
+
+    h1.hero-title em {
+      font-style: italic;
+      font-weight: 300;
+      color: rgba(255,255,255,0.75);
+    }
+
+    .hero-sub {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.65;
+      font-weight: 300;
+      max-width: 520px;
+      margin-bottom: 2.2rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--copper);
+      color: #fff;
+      padding: 0.85em 2em;
+      border-radius: 3px;
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover { background: var(--copper-lt); transform: translateY(-1px); }
+
+    .btn-ghost {
+      display: inline-block;
+      color: rgba(255,255,255,0.8);
+      padding: 0.85em 1.5em;
+      border-radius: 3px;
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 400;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.3);
+      transition: border-color 0.2s, color 0.2s, transform 0.15s;
+      cursor: pointer;
+    }
+
+    .btn-ghost:hover {
+      border-color: rgba(255,255,255,0.6);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2.5rem;
+      right: 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      color: rgba(255,255,255,0.4);
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      z-index: 2;
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 48px;
+      background: rgba(255,255,255,0.2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .scroll-line::after {
+      content: '';
+      position: absolute;
+      top: -100%;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--copper-lt);
+      animation: scrollDown 1.8s ease-in-out infinite;
+    }
+
+    @keyframes scrollDown {
+      0%   { top: -100%; }
+      100% { top: 100%; }
+    }
+
+    /* ── SECTIONS ── */
+    section { position: relative; }
+
+    .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--copper);
+      font-weight: 500;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+
+    .section-label::after {
+      content: '';
+      display: block;
+      flex: 1;
+      height: 1px;
+      background: var(--copper);
+      opacity: 0.3;
+      max-width: 60px;
+    }
+
+    /* ── PURPOSE / WELCOME ── */
+    #welcome {
+      background: var(--cream);
+      padding: 7rem 3rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      max-width: 1280px;
+      margin: 0 auto;
+      align-items: start;
+    }
+
+    .welcome-left {
+      position: sticky;
+      top: 5rem;
+    }
+
+    h2.section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.6rem, 4vw, 4rem);
+      font-weight: 500;
+      line-height: 1.1;
+      color: var(--forest);
+      margin-bottom: 1.8rem;
+      letter-spacing: -0.01em;
+    }
+
+    h2.section-title em {
+      font-style: italic;
+      color: var(--copper);
+    }
+
+    .welcome-stat-row {
+      display: flex;
+      gap: 2.5rem;
+      margin-top: 3rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--mist);
+    }
+
+    .stat {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .stat-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.8rem;
+      font-weight: 600;
+      color: var(--forest);
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+
+    .stat-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #888;
+      font-weight: 400;
+    }
+
+    .welcome-right p {
+      font-size: 1.08rem;
+      line-height: 1.78;
+      color: #444;
+      font-weight: 300;
+      margin-bottom: 1.5rem;
+    }
+
+    .welcome-right p strong {
+      color: var(--forest);
+      font-weight: 500;
+    }
+
+    .inclusion-box {
+      margin-top: 2rem;
+      padding: 1.8rem;
+      background: var(--forest);
+      color: rgba(255,255,255,0.85);
+      border-radius: 6px;
+    }
+
+    .inclusion-box p {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.75);
+      margin: 0;
+    }
+
+    .inclusion-box strong {
+      color: #fff;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 0.6rem;
+      font-weight: 500;
+    }
+
+    /* ── HISTORY ── */
+    #history {
+      background: var(--forest);
+      padding: 7rem 3rem;
+      overflow: hidden;
+    }
+
+    .history-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .history-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: end;
+      margin-bottom: 5rem;
+    }
+
+    .history-header .section-label { color: var(--copper-lt); }
+    .history-header .section-label::after { background: var(--copper-lt); }
+
+    h2.section-title.light {
+      color: #fff;
+    }
+
+    h2.section-title.light em {
+      color: var(--copper-lt);
+    }
+
+    .history-intro {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.75;
+      font-weight: 300;
+      align-self: end;
+    }
+
+    /* Timeline */
+    .timeline {
+      position: relative;
+      padding-left: 2.5rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 12px;
+      bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--copper) 0%, rgba(184,98,30,0.1) 100%);
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-bottom: 3.5rem;
+      opacity: 0;
+      transform: translateX(-16px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .timeline-item.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .timeline-item:last-child { padding-bottom: 0; }
+
+    .timeline-dot {
+      position: absolute;
+      left: -2.5rem;
+      top: 6px;
+      width: 11px;
+      height: 11px;
+      background: var(--copper);
+      border-radius: 50%;
+      transform: translateX(-5px);
+      box-shadow: 0 0 0 3px rgba(184,98,30,0.2);
+    }
+
+    .timeline-year {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      color: var(--copper-lt);
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .timeline-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 0.6rem;
+      line-height: 1.25;
+    }
+
+    .timeline-body {
+      font-size: 0.93rem;
+      color: rgba(255,255,255,0.58);
+      line-height: 1.72;
+      font-weight: 300;
+      max-width: 680px;
+    }
+
+    .timeline-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 5rem;
+    }
+
+    /* Renovations list */
+    .reno-list {
+      list-style: none;
+      margin-top: 0.8rem;
+    }
+
+    .reno-list li {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.5);
+      padding: 0.35rem 0;
+      padding-left: 1.2rem;
+      position: relative;
+      line-height: 1.5;
+    }
+
+    .reno-list li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--copper);
+      font-size: 0.75rem;
+    }
+
+    /* ── MISSION & PHASES ── */
+    #mission {
+      background: var(--stone);
+      padding: 7rem 3rem;
+    }
+
+    .mission-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .mission-top {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      margin-bottom: 5rem;
+      align-items: start;
+    }
+
+    .mission-body p {
+      font-size: 1.05rem;
+      line-height: 1.78;
+      color: #555;
+      font-weight: 300;
+      margin-bottom: 1.4rem;
+    }
+
+    .mission-body p strong {
+      color: var(--forest);
+      font-weight: 500;
+    }
+
+    /* Phases */
+    .phases-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--forest);
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+      opacity: 0.6;
+    }
+
+    .phases {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .phase {
+      display: grid;
+      grid-template-columns: 48px 1fr auto;
+      gap: 1.2rem;
+      align-items: center;
+      padding: 1.4rem 1.6rem;
+      background: #fff;
+      border-radius: 6px;
+      border: 1px solid var(--mist);
+      transition: box-shadow 0.2s;
+    }
+
+    .phase:hover {
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+
+    .phase-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--mist);
+      line-height: 1;
+      text-align: center;
+    }
+
+    .phase.completed .phase-num { color: var(--sage); }
+    .phase.in-progress .phase-num { color: var(--copper); }
+    .phase.ongoing .phase-num { color: var(--forest); }
+
+    .phase-text { }
+
+    .phase-title {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 0.25rem;
+    }
+
+    .phase-desc {
+      font-size: 0.8rem;
+      color: #888;
+      line-height: 1.5;
+      font-weight: 300;
+    }
+
+    .phase-badge {
+      font-size: 0.62rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 600;
+      padding: 0.3em 0.8em;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    .badge-done { background: #e8f5e8; color: #3a7a3a; }
+    .badge-progress { background: #fef0e4; color: var(--copper); }
+    .badge-ongoing { background: #e8eff2; color: #3a6080; }
+
+    /* BSA section */
+    .bsa-strip {
+      margin-top: 5rem;
+      background: var(--forest);
+      border-radius: 8px;
+      padding: 3rem 3.5rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .bsa-strip p {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.72;
+      font-weight: 300;
+    }
+
+    .bsa-strip p strong {
+      color: #fff;
+      font-weight: 500;
+    }
+
+    .bsa-stat {
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .bsa-stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 4rem;
+      font-weight: 700;
+      color: var(--copper-lt);
+      line-height: 1;
+    }
+
+    .bsa-stat-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-top: 0.3rem;
+    }
+
+    /* ── DONATE ── */
+    #donate {
+      background: var(--cream);
+      padding: 7rem 3rem;
+    }
+
+    .donate-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+
+    .donate-text .section-title {
+      margin-bottom: 1.6rem;
+    }
+
+    .donate-text p {
+      font-size: 1.02rem;
+      line-height: 1.75;
+      color: #555;
+      font-weight: 300;
+      margin-bottom: 1.2rem;
+    }
+
+    .donate-text p strong {
+      color: var(--forest);
+      font-weight: 500;
+    }
+
+    .donate-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .donate-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      background: var(--copper);
+      color: #fff;
+      padding: 1em 2.2em;
+      border-radius: 4px;
+      font-size: 0.88rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+      cursor: pointer;
+      width: fit-content;
+    }
+
+    .donate-btn:hover { background: var(--copper-lt); transform: translateY(-1px); }
+
+    .donate-card {
+      background: var(--forest);
+      border-radius: 8px;
+      padding: 3rem;
+      color: #fff;
+    }
+
+    .donate-card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+      color: rgba(255,255,255,0.9);
+    }
+
+    .donate-card-detail {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    .donate-card-detail strong {
+      color: rgba(255,255,255,0.9);
+      font-weight: 500;
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+
+    .donate-address {
+      margin-top: 1.8rem;
+      padding: 1.4rem;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 5px;
+    }
+
+    .donate-address .addr-line {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.9;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .donate-address .addr-line strong {
+      color: #fff;
+      font-weight: 500;
+      display: block;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--copper-lt);
+      margin-bottom: 0.4rem;
+    }
+
+    .tax-note {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.4);
+      margin-top: 1.2rem;
+      line-height: 1.5;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--bark);
+      padding: 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.7);
+      letter-spacing: 0.02em;
+    }
+
+    .footer-nav {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .footer-nav a {
+      color: rgba(255,255,255,0.4);
+      text-decoration: none;
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+      cursor: pointer;
+    }
+
+    .footer-nav a:hover { color: rgba(255,255,255,0.7); }
+
+    .footer-copy {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.25);
+    }
+
+    /* ── DIVIDER ── */
+    .leaf-divider {
+      text-align: center;
+      font-size: 1.2rem;
+      color: var(--sage);
+      opacity: 0.4;
+      padding: 0.5rem 0;
+      letter-spacing: 0.5em;
+    }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 0 1.5rem; }
+      .nav-links { display: none; }
+      #welcome { grid-template-columns: 1fr; gap: 2.5rem; padding: 4rem 1.5rem; }
+      .welcome-left { position: static; }
+      #history { padding: 4rem 1.5rem; }
+      .history-header { grid-template-columns: 1fr; gap: 1.5rem; }
+      .timeline-grid { grid-template-columns: 1fr; }
+      #mission { padding: 4rem 1.5rem; }
+      .mission-top { grid-template-columns: 1fr; gap: 2.5rem; }
+      .bsa-strip { grid-template-columns: 1fr; gap: 2rem; padding: 2rem; }
+      #donate { padding: 4rem 1.5rem; }
+      .donate-inner { grid-template-columns: 1fr; gap: 3rem; }
+      footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem; }
+      .hero-content { padding: 0 1.5rem 4rem; }
+      .hero-number { font-size: 50vw; }
+      .scroll-indicator { right: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav id="navbar">
+    <a class="nav-brand" href="#hero">
+      <span>284</span>
+      Friends of Radnor 284
+    </a>
+    <ul class="nav-links">
+      <li><a onclick="goTo('welcome')" class="active" id="nav-welcome">Welcome</a></li>
+      <li><a onclick="goTo('history')" id="nav-history">History</a></li>
+      <li><a onclick="goTo('mission')" id="nav-mission">Mission</a></li>
+      <li><a onclick="goTo('donate')" class="nav-donate" id="nav-donate">Donate</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg-fallback"></div>
+    <div class="hero-bg"></div>
+    <div class="hero-number">284</div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Radnor Township, PA &nbsp;·&nbsp; Est. 2014</p>
+      <h1 class="hero-title">Friends of<br><em>Radnor 284</em></h1>
+      <p class="hero-sub">
+        A 501(c)(3) nonprofit dedicated to the preservation of open space, the care of a historic stone schoolhouse,
+        and the enduring traditions of Scouting in Radnor Township — for generations to come.
+      </p>
+      <div class="hero-actions">
+        <a class="btn-primary" onclick="goTo('donate')">Support the Cabin</a>
+        <a class="btn-ghost" onclick="goTo('history')">Our Story</a>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- WELCOME / PURPOSE -->
+  <section id="welcome">
+    <div class="welcome-left reveal">
+      <p class="section-label">Our Purpose</p>
+      <h2 class="section-title">A community rooted in<br><em>land, legacy, and service.</em></h2>
+      <div class="welcome-stat-row">
+        <div class="stat">
+          <span class="stat-number">99+</span>
+          <span class="stat-label">Years of Scouting</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">175+</span>
+          <span class="stat-label">Eagle Scouts</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">2.2</span>
+          <span class="stat-label">Acres Preserved</span>
+        </div>
+      </div>
+    </div>
+    <div class="welcome-right reveal">
+      <p>
+        Friends of Radnor 284, Inc. exists to champion two things that define this community:
+        <strong>Scouting and open space.</strong> Together, they shape young lives and preserve
+        the natural character of Radnor Township for everyone who calls it home.
+      </p>
+      <p>
+        At the heart of our work is The Cabin — a century-old stone schoolhouse at the corner of
+        Darby-Paoli and Godfrey Roads that has served as home base for Radnor Troop 284 since 1962.
+        After decades of stewardship by scouts and parents, the property is now permanently protected
+        with a conservation easement, ensuring it will never be developed.
+      </p>
+      <p>
+        Through community fundraising, alumni support, and partnership with Radnor Township,
+        FOR284 closed on 2.2 acres of land in May 2018 and has since invested in a comprehensive
+        renovation of The Cabin — restoring what was deferred, and expanding what was possible.
+      </p>
+      <div class="inclusion-box">
+        <strong>Open to All</strong>
+        <p>
+          FOR284 and Radnor Troop 284 welcome every member of the local and wider community —
+          regardless of geographic or ethnic origin, sexual orientation, religious affiliation,
+          age, income level, or special needs.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HISTORY -->
+  <section id="history">
+    <div class="history-inner">
+      <div class="history-header reveal">
+        <div>
+          <p class="section-label">History So Far</p>
+          <h2 class="section-title light">Six decades of<br><em>roots in this place.</em></h2>
+        </div>
+        <p class="history-intro">
+          What began as a troop displaced from a condemned cabin has become a permanent, protected home
+          for Scouting in Radnor Township. Here is the story of how we got here.
+        </p>
+      </div>
+
+      <div class="timeline-grid">
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <p class="timeline-year">1962</p>
+            <p class="timeline-title">A New Home at the Schoolhouse</p>
+            <p class="timeline-body">
+              When the troop's previous cabin at Odorisio Park was acquired by the Radnor Township School District,
+              Troop 284 relocated to a one-room schoolhouse on Darby-Paoli and Godfrey Roads — a property "in the middle
+              of nowhere" before the surrounding neighborhoods were built. The troop dubbed it <em>The Cabin</em>, and it has
+              carried that name ever since.
+            </p>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <p class="timeline-year">1962 – 2013</p>
+            <p class="timeline-title">Five Decades of Stewardship</p>
+            <p class="timeline-body">
+              Troop 284 rented the land from the Scott family for $1 per year. Scouts and parents replaced windows,
+              put on a new roof, installed a wood-burning stove, and kept the building alive through generations.
+              Maintenance was always a collective act of community — limited funds, unlimited commitment.
+            </p>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <p class="timeline-year">2014</p>
+            <p class="timeline-title">FOR284 is Founded</p>
+            <p class="timeline-body">
+              In March 2014, Friends of Radnor 284 was incorporated as a 501(c)(3) with one clear goal:
+              acquire a portion of the Wheeler Field surrounding The Cabin before the Ardrossan land sale
+              displaced the troop entirely. A fundraising goal of $1 million was set. The community answered.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <p class="timeline-year">2018</p>
+            <p class="timeline-title">The Land is Ours</p>
+            <p class="timeline-body">
+              After four years of fundraising, legal work, and partnership with Radnor Township —
+              which used a Natural Lands Trust grant on a "spend a million, receive a million" match —
+              FOR284 closed on 2.2 acres in May 2018. A permanent conservation easement was placed on
+              the land. Development is no longer possible. The Cabin belongs to Scouting, forever.
+            </p>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <p class="timeline-year">2020 – Present</p>
+            <p class="timeline-title">The Renovation</p>
+            <p class="timeline-body">
+              Construction began in 2020 to address decades of deferred maintenance and expand the property's capabilities.
+              Work completed includes:
+            </p>
+            <ul class="reno-list">
+              <li>Equipment storage shed for lawnmowers and gear</li>
+              <li>Basement excavation with Bilco door for flexible meeting space</li>
+              <li>New porch and Quartermaster's shed around the building</li>
+              <li>Full repointing of the original stone exterior</li>
+              <li>New bell tower and vintage bell — restoring what was stolen in the 1960s</li>
+            </ul>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <p class="timeline-year">Looking Ahead</p>
+            <p class="timeline-title">The Darby-Paoli Trail & Endowment</p>
+            <p class="timeline-body">
+              FOR284 will partner with Radnor Township when the Darby-Paoli Trail is constructed — the trail
+              will pass directly through the property's right-of-way. Ongoing fundraising will build an endowment
+              supporting property upkeep, Eagle Project funding, and summer camperships for scouts who need assistance.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MISSION -->
+  <section id="mission">
+    <div class="mission-inner">
+      <div class="mission-top">
+        <div class="reveal">
+          <p class="section-label">Our Mission</p>
+          <h2 class="section-title">A four-phase<br><em>plan for permanence.</em></h2>
+          <div class="mission-body">
+            <p>
+              Troop 284 has touched nearly every family in Radnor Township over nearly a century.
+              Whether you've bought a wreath from a young Scout, walked a trail an Eagle Scout built,
+              or simply watched the troop march at a community event — this legacy belongs to all of us.
+            </p>
+            <p>
+              Our aggregate fundraising goal of <strong>$1 million</strong> was designed to cover the
+              land purchase, the renovation, and a lasting endowment — ensuring Scouting in Radnor
+              Township has a permanent, well-resourced home for the next century.
+            </p>
+          </div>
+        </div>
+
+        <div class="reveal">
+          <p class="phases-label">Fundraising Phases</p>
+          <div class="phases">
+            <div class="phase completed">
+              <div class="phase-num">I</div>
+              <div class="phase-text">
+                <p class="phase-title">Acquire the Property</p>
+                <p class="phase-desc">Purchase the Cabin and 2.2 surrounding acres with conservation easement.</p>
+              </div>
+              <span class="phase-badge badge-done">Completed</span>
+            </div>
+            <div class="phase completed">
+              <div class="phase-num">II</div>
+              <div class="phase-text">
+                <p class="phase-title">Plan &amp; Renovate</p>
+                <p class="phase-desc">Design and execute improvements addressing deferred maintenance and expanded programming space.</p>
+              </div>
+              <span class="phase-badge badge-done">Completed</span>
+            </div>
+            <div class="phase in-progress">
+              <div class="phase-num">III</div>
+              <div class="phase-text">
+                <p class="phase-title">Build the Endowment</p>
+                <p class="phase-desc">Raise funds to sustain ongoing property upkeep and programming for generations.</p>
+              </div>
+              <span class="phase-badge badge-progress">In Progress</span>
+            </div>
+            <div class="phase ongoing">
+              <div class="phase-num">IV</div>
+              <div class="phase-text">
+                <p class="phase-title">Support Scouting</p>
+                <p class="phase-desc">Fund camperships, Eagle Projects, and open-space preservation throughout Radnor Township.</p>
+              </div>
+              <span class="phase-badge badge-ongoing">Ongoing</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bsa-strip reveal">
+        <div>
+          <p style="font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--copper-lt);margin-bottom:1rem;font-weight:500;">About Troop 284</p>
+          <p>
+            <strong>Radnor Troop 284 has operated for over 99 years</strong> — one of the longest continuously
+            active troops in the region. Through decades of Scout camping trips, high-adventure programs,
+            and community service, the troop has shaped the character of thousands of young people from
+            Radnor Township and the surrounding communities. The improved facilities have allowed Troop 284
+            to continue meeting even through challenging times, maintaining a robust outdoor program that
+            sets it apart.
+          </p>
+          <p style="margin-top:1rem;">
+            Your support carries forward more than a building. It carries forward a way of becoming.
+          </p>
+        </div>
+        <div class="bsa-stat">
+          <div class="bsa-stat-num">175+</div>
+          <div class="bsa-stat-label">Eagle Scouts<br>in recorded history</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DONATE -->
+  <section id="donate">
+    <div class="donate-inner">
+      <div class="donate-text reveal">
+        <p class="section-label">Give Today</p>
+        <h2 class="section-title">Help preserve this place<br><em>for the next generation.</em></h2>
+        <p>
+          Your contribution directly supports the ongoing stewardship of The Cabin,
+          the endowment that keeps it running, and the Scouting programs that have shaped
+          this community for a century.
+        </p>
+        <p>
+          Every gift — whatever its size — is meaningful. Alumni, parents, community members,
+          and neighbors have collectively raised nearly half of our original $1 million goal.
+          <strong>We are still building.</strong>
+        </p>
+        <p>
+          You can donate online through our secure portal, or mail a check directly —
+          mailing your check ensures 100% of your contribution goes to the Cabin and Land fund.
+        </p>
+        <div class="donate-actions">
+          <a class="donate-btn" href="https://for284.org/donate" target="_blank" rel="noopener">
+            Donate Online
+          </a>
+        </div>
+      </div>
+
+      <div class="donate-card reveal">
+        <p class="donate-card-title">Donate by Mail</p>
+        <p class="donate-card-detail">
+          Make your check payable to <strong>Friends of Radnor 284</strong> and mail it to our PO Box.
+          Mailing your donation ensures that the full amount of your tax-deductible gift goes to the
+          Cabin and Land fund — no processing fees deducted.
+        </p>
+        <div class="donate-address">
+          <div class="addr-line">
+            <strong>Mailing Address</strong>
+            Friends of Radnor 284<br>
+            PO Box 142<br>
+            Wayne, PA 19087
+          </div>
+        </div>
+        <p class="tax-note">
+          Friends of Radnor Troop 284 is a registered nonprofit under IRS Code Section 501(c)(3).
+          All donations are tax-deductible to the full extent permitted by law.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-brand">Friends of Radnor 284</span>
+    <ul class="footer-nav">
+      <li><a onclick="goTo('welcome')">Welcome</a></li>
+      <li><a onclick="goTo('history')">History</a></li>
+      <li><a onclick="goTo('mission')">Mission</a></li>
+      <li><a onclick="goTo('donate')">Donate</a></li>
+    </ul>
+    <span class="footer-copy">501(c)(3) · Wayne, PA 19087</span>
+  </footer>
+
+  <script>
+    // Nav scroll behavior
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 60);
+    });
+    navbar.classList.toggle('scrolled', window.scrollY > 60);
+
+    // Smooth scroll to section
+    window.goTo = (id) => {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    };
+
+    // Active nav link on scroll
+    const sections = ['welcome', 'history', 'mission', 'donate'];
+    const navLinks = sections.map(id => document.getElementById('nav-' + id));
+    const sectionEls = sections.map(id => document.getElementById(id));
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const idx = sectionEls.indexOf(entry.target);
+          navLinks.forEach((l, i) => l && l.classList.toggle('active', i === idx));
+        }
+      });
+    }, { threshold: 0.35 });
+
+    sectionEls.forEach(el => el && observer.observe(el));
+
+    // Scroll reveal
+    const revealEls = document.querySelectorAll('.reveal, .timeline-item');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const delay = el.classList.contains('timeline-item')
+            ? Array.from(el.parentNode.children).indexOf(el) * 120
+            : 0;
+          setTimeout(() => el.classList.add('visible'), delay);
+          revealObserver.unobserve(el);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    revealEls.forEach(el => revealObserver.observe(el));
+
+    // Animate stat numbers
+    function animateCount(el, target, decimals = 0, suffix = '') {
+      const start = performance.now();
+      const duration = 1400;
+      const update = (now) => {
+        const t = Math.min((now - start) / duration, 1);
+        const ease = 1 - Math.pow(1 - t, 3);
+        const val = (target * ease).toFixed(decimals);
+        el.textContent = val + suffix;
+        if (t < 1) requestAnimationFrame(update);
+      };
+      requestAnimationFrame(update);
+    }
+
+    const statObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const nums = entry.target.querySelectorAll('.stat-number');
+          nums.forEach(n => {
+            const raw = parseFloat(n.textContent);
+            const hasDec = n.textContent.includes('.');
+            animateCount(n, raw, hasDec ? 1 : 0, n.textContent.includes('+') ? '+' : '');
+          });
+          statObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    const welcomeLeft = document.querySelector('.welcome-left');
+    if (welcomeLeft) statObserver.observe(welcomeLeft);
+
+    // Hero background image load with fallback
+    const heroBg = document.querySelector('.hero-bg');
+    const img = new Image();
+    img.onload = () => { heroBg.style.opacity = 1; };
+    img.onerror = () => { heroBg.style.display = 'none'; };
+    img.src = 'https://for284.org/files/editor/image/for284/for284-banner.jpg';
+  </script>
+
+</body>
+</html>
