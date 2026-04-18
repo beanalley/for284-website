@@ -1307,35 +1307,156 @@
       transform: translateY(0);
     }
 
-    /* ── RESPONSIVE ── */
+    /* ── HAMBURGER ── */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px;
+      z-index: 200;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: rgba(255,255,255,0.85);
+      border-radius: 2px;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ── MOBILE DRAWER ── */
+    .nav-mobile {
+      display: none;
+      position: fixed;
+      top: 68px; left: 0; right: 0;
+      background: rgba(22, 43, 33, 0.98);
+      backdrop-filter: blur(16px);
+      padding: 0.5rem 2rem 2rem;
+      flex-direction: column;
+      z-index: 99;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      opacity: 0;
+      transform: translateY(-8px);
+      transition: opacity 0.25s, transform 0.25s;
+      pointer-events: none;
+    }
+    .nav-mobile.open {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .nav-mobile a {
+      color: rgba(255,255,255,0.72);
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 400;
+      padding: 0.9rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      letter-spacing: 0.05em;
+      transition: color 0.2s;
+      cursor: pointer;
+      display: block;
+    }
+    .nav-mobile a:last-child { border-bottom: none; }
+    .nav-mobile a:hover, .nav-mobile a.active { color: var(--copper-lt); }
+    .nav-mobile-donate {
+      margin-top: 1rem;
+      background: var(--copper) !important;
+      color: #fff !important;
+      text-align: center;
+      border-radius: 4px;
+      font-size: 0.82rem !important;
+      letter-spacing: 0.12em !important;
+      text-transform: uppercase;
+      font-weight: 500 !important;
+      border-bottom: none !important;
+      padding: 0.9rem !important;
+    }
+    .nav-mobile-donate:hover { background: var(--copper-lt) !important; }
+
+    /* ── RESPONSIVE 900px ── */
     @media (max-width: 900px) {
       nav { padding: 0 1.5rem; }
       .nav-links { display: none; }
-      #welcome { grid-template-columns: 1fr; gap: 2.5rem; padding: 4rem 1.5rem; }
+      .nav-hamburger { display: flex; }
+      .nav-mobile { display: flex; }
+
+      #welcome { grid-template-columns: 1fr; gap: 2.5rem; padding: 5rem 1.5rem 4rem; }
       .welcome-left { position: static; }
+      .welcome-stat-row { gap: 1.5rem; }
+
       #history { padding: 4rem 1.5rem; }
-      .history-header { grid-template-columns: 1fr; gap: 1.5rem; }
+      .history-header { grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 3rem; }
       .timeline-grid { grid-template-columns: 1fr; }
+
       #mission { padding: 4rem 1.5rem; }
-      .mission-top { grid-template-columns: 1fr; gap: 2.5rem; }
+      .mission-top { grid-template-columns: 1fr; gap: 2.5rem; margin-bottom: 3rem; }
       .bsa-strip { grid-template-columns: 1fr; gap: 2rem; padding: 2rem; }
+
       #photos { padding: 4rem 1.5rem; }
-      .photos-header { grid-template-columns: 1fr; gap: 1.5rem; }
+      .photos-header { grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 2.5rem; }
       .photo-item { width: calc(50% - 3px); }
+
+      #board { padding: 4rem 1.5rem; }
+      .board-header { grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 2.5rem; }
+      .board-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+      #events { padding: 4rem 1.5rem; }
+      .events-header { grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 2.5rem; }
+      .events-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+
       #donate { padding: 4rem 1.5rem; }
       .donate-options { grid-template-columns: 1fr; }
-      #board { padding: 4rem 1.5rem; }
-      .board-header { grid-template-columns: 1fr; gap: 1.5rem; }
-      .board-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
-      #events { padding: 4rem 1.5rem; }
-      .events-header { grid-template-columns: 1fr; gap: 1.5rem; }
-      .events-grid { grid-template-columns: 1fr; gap: 1rem; }
-      #donate { padding: 4rem 1.5rem; }
-      .donate-inner { grid-template-columns: 1fr; gap: 3rem; }
+
       footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem; }
+      .footer-nav { flex-wrap: wrap; justify-content: center; gap: 1rem; }
+
       .hero-content { padding: 0 1.5rem 4rem; }
       .hero-number { font-size: 50vw; }
       .scroll-indicator { right: 1.5rem; }
+    }
+
+    /* ── RESPONSIVE 480px ── */
+    @media (max-width: 480px) {
+      nav { padding: 0 1.2rem; }
+      .nav-brand { font-size: 1.1rem; }
+
+      .hero-content { padding: 0 1.2rem 3rem; }
+      h1.hero-title { font-size: clamp(2.2rem, 10vw, 3.2rem); }
+      .hero-actions { flex-direction: column; align-items: stretch; gap: 0.7rem; }
+      .btn-primary, .btn-ghost { text-align: center; }
+
+      #welcome { padding: 4rem 1.2rem 3rem; }
+      .welcome-stat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+
+      #history { padding: 3rem 1.2rem; }
+      #mission { padding: 3rem 1.2rem; }
+      .bsa-strip { padding: 1.5rem; }
+      .phase { grid-template-columns: 40px 1fr; }
+      .phase-badge { display: none; }
+
+      #photos { padding: 3rem 1.2rem; }
+      .photo-item { width: calc(80% - 3px); }
+
+      #board { padding: 3rem 1.2rem; }
+      .board-grid { grid-template-columns: 1fr; }
+      .board-card { padding: 1.4rem; }
+
+      #events { padding: 3rem 1.2rem; }
+      .events-grid { grid-template-columns: 1fr; }
+
+      #donate { padding: 3rem 1.2rem; }
+      .donate-option { padding: 2rem; }
+
+      footer { padding: 1.5rem 1.2rem; }
+      .footer-nav { display: none; }
     }
   </style>
 </head>
@@ -1356,7 +1477,21 @@
       <li><a onclick="goTo('events')" id="nav-events">Events</a></li>
       <li><a onclick="goTo('donate')" class="nav-donate" id="nav-donate">Donate</a></li>
     </ul>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
+
+  <!-- MOBILE DRAWER -->
+  <div class="nav-mobile" id="nav-mobile" role="navigation" aria-label="Mobile menu">
+    <a onclick="mobileGoTo('welcome')">Welcome</a>
+    <a onclick="mobileGoTo('history')">History</a>
+    <a onclick="mobileGoTo('photos')">Photos</a>
+    <a onclick="mobileGoTo('mission')">Mission</a>
+    <a onclick="mobileGoTo('board')">Board</a>
+    <a onclick="mobileGoTo('events')">Events</a>
+    <a onclick="mobileGoTo('donate')" class="nav-mobile-donate">Donate</a>
+  </div>
 
   <!-- HERO -->
   <section id="hero">
@@ -1858,17 +1993,34 @@
       if (el) el.scrollIntoView({ behavior: 'smooth' });
     };
 
-    // Carousel navigation
-    window.carouselPrev = (btn) => {
-      const carousel = btn.closest('.photos-album-label').nextElementSibling.querySelector('.photo-carousel');
-      const itemW = carousel.querySelector('.photo-item').offsetWidth + 6;
-      carousel.scrollBy({ left: -itemW * 4, behavior: 'smooth' });
+    // Mobile hamburger menu
+    const hamburger = document.getElementById('nav-hamburger');
+    const mobileNav = document.getElementById('nav-mobile');
+    hamburger.addEventListener('click', () => {
+      const open = hamburger.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', open);
+      mobileNav.classList.toggle('open', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+    window.mobileGoTo = (id) => {
+      hamburger.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', false);
+      mobileNav.classList.remove('open');
+      document.body.style.overflow = '';
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
     };
-    window.carouselNext = (btn) => {
+
+    // Carousel navigation — scroll by number of visible items
+    function carouselScroll(btn, dir) {
       const carousel = btn.closest('.photos-album-label').nextElementSibling.querySelector('.photo-carousel');
-      const itemW = carousel.querySelector('.photo-item').offsetWidth + 6;
-      carousel.scrollBy({ left: itemW * 4, behavior: 'smooth' });
-    };
+      const item = carousel.querySelector('.photo-item');
+      const itemW = item.offsetWidth + 6;
+      const visible = Math.round(carousel.offsetWidth / itemW);
+      carousel.scrollBy({ left: dir * itemW * visible, behavior: 'smooth' });
+    }
+    window.carouselPrev = (btn) => carouselScroll(btn, -1);
+    window.carouselNext = (btn) => carouselScroll(btn, 1);
 
     // Active nav link on scroll
     const sections = ['welcome', 'history', 'photos', 'mission', 'board', 'events', 'donate'];
