@@ -1077,6 +1077,132 @@
 
     .board-card.voting .board-role { color: var(--copper); }
 
+    /* ── EVENTS ── */
+    #events {
+      background: var(--forest);
+      padding: 7rem 3rem;
+    }
+
+    .events-inner { max-width: 1280px; margin: 0 auto; }
+
+    .events-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: end;
+      margin-bottom: 4rem;
+    }
+
+    .events-header .section-label { color: var(--copper-lt); }
+    .events-header .section-label::after { background: var(--copper-lt); }
+
+    .events-header p {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.72;
+      font-weight: 300;
+      align-self: end;
+    }
+
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .event-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 6px;
+      padding: 2rem;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .event-card:hover {
+      background: rgba(255,255,255,0.07);
+      border-color: rgba(255,255,255,0.14);
+    }
+
+    .event-date {
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--copper-lt);
+      font-weight: 500;
+      margin-bottom: 0.8rem;
+    }
+
+    .event-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 0.6rem;
+      line-height: 1.2;
+    }
+
+    .event-location {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 0.08em;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+    }
+
+    .event-desc {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    .event-tag {
+      display: inline-block;
+      margin-top: 1.2rem;
+      font-size: 0.62rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 600;
+      padding: 0.3em 0.8em;
+      border-radius: 20px;
+      background: rgba(184,98,30,0.2);
+      color: var(--copper-lt);
+    }
+
+    /* ── 2030 PLAN ── */
+    .plan-2030 {
+      margin-top: 2.5rem;
+      padding: 2rem;
+      background: var(--forest);
+      border-radius: 6px;
+      border-left: 3px solid var(--copper);
+    }
+
+    .plan-2030-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--copper-lt);
+      font-weight: 500;
+      margin-bottom: 0.6rem;
+    }
+
+    .plan-2030-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 0.7rem;
+      line-height: 1.2;
+    }
+
+    .plan-2030 p {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.62);
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
     /* ── FOOTER ── */
     footer {
       background: var(--bark);
@@ -1158,6 +1284,9 @@
       #board { padding: 4rem 1.5rem; }
       .board-header { grid-template-columns: 1fr; gap: 1.5rem; }
       .board-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+      #events { padding: 4rem 1.5rem; }
+      .events-header { grid-template-columns: 1fr; gap: 1.5rem; }
+      .events-grid { grid-template-columns: 1fr; gap: 1rem; }
       #donate { padding: 4rem 1.5rem; }
       .donate-inner { grid-template-columns: 1fr; gap: 3rem; }
       footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem; }
@@ -1181,6 +1310,7 @@
       <li><a onclick="goTo('photos')" id="nav-photos">Photos</a></li>
       <li><a onclick="goTo('mission')" id="nav-mission">Mission</a></li>
       <li><a onclick="goTo('board')" id="nav-board">Board</a></li>
+      <li><a onclick="goTo('events')" id="nav-events">Events</a></li>
       <li><a onclick="goTo('donate')" class="nav-donate" id="nav-donate">Donate</a></li>
     </ul>
   </nav>
@@ -1219,7 +1349,7 @@
           <span class="stat-label">Years of Scouting</span>
         </div>
         <div class="stat">
-          <span class="stat-number">175+</span>
+          <span class="stat-number">200+</span>
           <span class="stat-label">Eagle Scouts</span>
         </div>
         <div class="stat">
@@ -1520,7 +1650,7 @@
           </p>
         </div>
         <div class="bsa-stat">
-          <div class="bsa-stat-num">175+</div>
+          <div class="bsa-stat-num">200+</div>
           <div class="bsa-stat-label">Eagle Scouts<br>in recorded history</div>
         </div>
       </div>
@@ -1573,6 +1703,51 @@
     </div>
   </section>
 
+  <!-- EVENTS -->
+  <section id="events">
+    <div class="events-inner">
+      <div class="events-header reveal">
+        <div>
+          <p class="section-label">Upcoming Events</p>
+          <h2 class="section-title light">Join us<br><em>this year.</em></h2>
+        </div>
+        <p>Friends of Radnor 284 and Troop 284 host gatherings throughout the year for current families, alumni, and supporters. All are welcome.</p>
+      </div>
+
+      <div class="events-grid">
+        <div class="event-card reveal">
+          <p class="event-date">May 8, 2026 &nbsp;·&nbsp; 6:00 PM</p>
+          <p class="event-title">Spring Social</p>
+          <p class="event-location">The Cabin, Radnor Township</p>
+          <p class="event-desc">
+            A joint gathering for current Troop 284 parents and Friends of Radnor alumni. Come meet the community, catch up with old friends, and raise a glass (BYOB). At 7:00 PM, former Scoutmaster Eric Janson will take us through the history of the cabin and the troop, drawing on decades of backpacking, camping, and hiking with Radnor Scouts.
+          </p>
+          <span class="event-tag">Open to All</span>
+        </div>
+
+        <div class="event-card reveal">
+          <p class="event-date">August 2026</p>
+          <p class="event-title">Alumni Camping Trip</p>
+          <p class="event-location">Location to be announced</p>
+          <p class="event-desc">
+            The first in a new series of alumni camping events. Whether you were a Scout ten years ago or thirty, these trips are a chance to get back outdoors with people who share the same love of the wilderness that Scouting instilled in all of us. Dates and locations coming soon.
+          </p>
+          <span class="event-tag">Alumni</span>
+        </div>
+
+        <div class="event-card reveal">
+          <p class="event-date">December 2026</p>
+          <p class="event-title">Alumni Night Out</p>
+          <p class="event-location">Wayne, PA</p>
+          <p class="event-desc">
+            A casual evening in Wayne for recent Troop 284 alumni (21 and older). A low-key chance to reconnect with fellow Scouts and catch up on what everyone has been up to. More details to follow.
+          </p>
+          <span class="event-tag">21+</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- DONATE -->
   <section id="donate">
     <div class="donate-inner">
@@ -1585,14 +1760,21 @@
           this community for a century.
         </p>
         <p>
-          Every gift — whatever its size — is meaningful. Alumni, parents, community members,
+          Every gift, whatever its size, is meaningful. Alumni, parents, community members,
           and neighbors have collectively raised nearly half of our original $1 million goal.
           <strong>We are still building.</strong>
         </p>
         <p>
-          You can donate online through our secure portal, or mail a check directly —
-          mailing your check ensures 100% of your contribution goes to the Cabin and Land fund.
+          You can donate online through our secure portal, or mail a check directly.
+          Mailing your check ensures 100% of your contribution goes to the Cabin and Land fund.
         </p>
+        <div class="plan-2030">
+          <p class="plan-2030-label">Our Path to 2030</p>
+          <p class="plan-2030-title">A perpetual endowment by 2030.</p>
+          <p>
+            Friends of Radnor 284 has secured the property and completed the renovation. Our focus now is building an endowment that makes this work permanent. By 2030, we intend for FOR284 to have the financial footing to support Scouting in Radnor Township indefinitely, covering property upkeep, summer camperships for Scouts who need them, Eagle Project funding, and the preservation of the open space this troop has called home for over a century. Troop 284 has averaged four Eagle Scouts a year for generations. That record is worth protecting.
+          </p>
+        </div>
         <div class="donate-actions">
           <a class="donate-btn" href="https://for284.org/donate" target="_blank" rel="noopener">
             Donate Online
@@ -1605,7 +1787,7 @@
         <p class="donate-card-detail">
           Make your check payable to <strong>Friends of Radnor 284</strong> and mail it to our PO Box.
           Mailing your donation ensures that the full amount of your tax-deductible gift goes to the
-          Cabin and Land fund — no processing fees deducted.
+          Cabin and Land fund with no processing fees deducted.
         </p>
         <div class="donate-address">
           <div class="addr-line">
@@ -1632,6 +1814,7 @@
       <li><a onclick="goTo('photos')">Photos</a></li>
       <li><a onclick="goTo('mission')">Mission</a></li>
       <li><a onclick="goTo('board')">Board</a></li>
+      <li><a onclick="goTo('events')">Events</a></li>
       <li><a onclick="goTo('donate')">Donate</a></li>
     </ul>
     <span class="footer-copy">501(c)(3) · Wayne, PA 19087</span>
@@ -1652,7 +1835,7 @@
     };
 
     // Active nav link on scroll
-    const sections = ['welcome', 'history', 'photos', 'mission', 'board', 'donate'];
+    const sections = ['welcome', 'history', 'photos', 'mission', 'board', 'events', 'donate'];
     const navLinks = sections.map(id => document.getElementById('nav-' + id));
     const sectionEls = sections.map(id => document.getElementById(id));
 
