@@ -789,46 +789,84 @@
     .donate-inner {
       max-width: 1280px;
       margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6rem;
-      align-items: center;
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
     }
 
-    .donate-text .section-title {
-      margin-bottom: 1.6rem;
-    }
+    .donate-header { max-width: 780px; }
 
-    .donate-text p {
+    .donate-header .section-title { margin-bottom: 1.4rem; }
+
+    .donate-header p {
       font-size: 1.02rem;
       line-height: 1.75;
       color: #555;
       font-weight: 300;
-      margin-bottom: 1.2rem;
+      margin-bottom: 1rem;
     }
 
-    .donate-text p strong {
+    .donate-header p strong {
       color: var(--forest);
       font-weight: 500;
     }
 
-    .donate-actions {
+    .donate-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      align-items: stretch;
+    }
+
+    .donate-option {
+      background: var(--forest);
+      border-radius: 8px;
+      padding: 2.8rem;
+      color: #fff;
       display: flex;
       flex-direction: column;
-      gap: 1rem;
-      margin-top: 2rem;
+    }
+
+    .donate-option-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--copper-lt);
+      font-weight: 500;
+      margin-bottom: 0.7rem;
+    }
+
+    .donate-option-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.45rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .donate-option p {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.58);
+      line-height: 1.72;
+      font-weight: 300;
+      flex: 1;
+    }
+
+    .donate-option p strong {
+      color: rgba(255,255,255,0.9);
+      font-weight: 500;
     }
 
     .donate-btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 0.6rem;
       background: var(--copper);
       color: #fff;
-      padding: 1em 2.2em;
+      padding: 0.9em 2em;
       border-radius: 4px;
-      font-size: 0.88rem;
+      font-size: 0.82rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       font-weight: 500;
@@ -836,68 +874,35 @@
       transition: background 0.2s, transform 0.15s;
       cursor: pointer;
       width: fit-content;
+      margin-top: 1.8rem;
     }
 
     .donate-btn:hover { background: var(--copper-lt); transform: translateY(-1px); }
 
-    .donate-card {
-      background: var(--forest);
-      border-radius: 8px;
-      padding: 3rem;
-      color: #fff;
-    }
-
-    .donate-card-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.3rem;
-      font-weight: 500;
-      margin-bottom: 1.5rem;
-      color: rgba(255,255,255,0.9);
-    }
-
-    .donate-card-detail {
-      font-size: 0.9rem;
-      color: rgba(255,255,255,0.55);
-      line-height: 1.7;
-      font-weight: 300;
-    }
-
-    .donate-card-detail strong {
-      color: rgba(255,255,255,0.9);
-      font-weight: 500;
-      display: block;
-      margin-bottom: 0.2rem;
-    }
-
     .donate-address {
-      margin-top: 1.8rem;
-      padding: 1.4rem;
+      margin-top: 1.6rem;
+      padding: 1.2rem 1.4rem;
       background: rgba(255,255,255,0.05);
       border: 1px solid rgba(255,255,255,0.1);
       border-radius: 5px;
-    }
-
-    .donate-address .addr-line {
       font-size: 0.85rem;
       color: rgba(255,255,255,0.7);
       line-height: 1.9;
-      font-family: 'DM Sans', sans-serif;
     }
 
-    .donate-address .addr-line strong {
-      color: #fff;
-      font-weight: 500;
+    .donate-address strong {
       display: block;
-      font-size: 0.72rem;
-      letter-spacing: 0.12em;
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--copper-lt);
+      font-weight: 500;
       margin-bottom: 0.4rem;
     }
 
     .tax-note {
-      font-size: 0.78rem;
-      color: rgba(255,255,255,0.4);
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.35);
       margin-top: 1.2rem;
       line-height: 1.5;
     }
@@ -950,24 +955,34 @@
       background: rgba(255,255,255,0.08);
     }
 
-    .photo-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 6px;
+    .photo-carousel-wrap {
+      position: relative;
     }
 
-    .photo-grid.historical { grid-template-columns: repeat(3, 1fr); }
+    .photo-carousel {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding-bottom: 2px;
+    }
+
+    .photo-carousel::-webkit-scrollbar { display: none; }
 
     .photo-item {
+      flex-shrink: 0;
+      width: calc(25% - 5px);
       position: relative;
       overflow: hidden;
       border-radius: 3px;
       aspect-ratio: 4/3;
       cursor: pointer;
+      scroll-snap-align: start;
       background: rgba(255,255,255,0.04);
     }
-
-    .photo-item.tall { grid-row: span 2; aspect-ratio: unset; }
 
     .photo-item img {
       width: 100%;
@@ -995,6 +1010,33 @@
     }
 
     .photo-item:hover .photo-caption { opacity: 1; }
+
+    .carousel-nav {
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.5rem;
+      margin-top: 0.8rem;
+    }
+
+    .carousel-btn {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.6);
+      width: 32px; height: 32px;
+      border-radius: 3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: background 0.2s, color 0.2s;
+      user-select: none;
+    }
+
+    .carousel-btn:hover {
+      background: rgba(255,255,255,0.15);
+      color: #fff;
+    }
 
     /* ── BOARD ── */
     #board {
@@ -1279,8 +1321,9 @@
       .bsa-strip { grid-template-columns: 1fr; gap: 2rem; padding: 2rem; }
       #photos { padding: 4rem 1.5rem; }
       .photos-header { grid-template-columns: 1fr; gap: 1.5rem; }
-      .photo-grid { grid-template-columns: repeat(2, 1fr); }
-      .photo-item.tall { grid-row: span 1; aspect-ratio: 4/3; }
+      .photo-item { width: calc(50% - 3px); }
+      #donate { padding: 4rem 1.5rem; }
+      .donate-options { grid-template-columns: 1fr; }
       #board { padding: 4rem 1.5rem; }
       .board-header { grid-template-columns: 1fr; gap: 1.5rem; }
       .board-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
@@ -1500,75 +1543,54 @@
         <p>From a 19th-century one-room schoolhouse to a fully renovated Scout home. These photos document the history and transformation of The Cabin at Darby-Paoli and Godfrey Roads.</p>
       </div>
 
-      <p class="photos-album-label reveal">Cabin Historical Photos</p>
-      <div class="photo-grid historical reveal">
-        <div class="photo-item tall">
-          <img src="https://myfunrun.nyc3.cdn.digitaloceanspaces.com/assets/site/album/2803/-2803.758be714-4e34-479b-8e0f-acabe18968f3.jpg" alt="Radnor Township School #7" loading="lazy">
-          <div class="photo-caption">Radnor Township School #7, the original schoolhouse</div>
+      <div class="photos-album-label reveal">
+        Cabin Historical Photos
+        <div class="carousel-nav">
+          <button class="carousel-btn" onclick="carouselPrev(this)">&#8592;</button>
+          <button class="carousel-btn" onclick="carouselNext(this)">&#8594;</button>
         </div>
-        <div class="photo-item">
-          <img src="https://myfunrun.nyc3.cdn.digitaloceanspaces.com/assets/site/album/2803/-2803.93acecea-74ab-4b51-b1e5-f9d92da1a2de.jpg" alt="Historical photo" loading="lazy">
-          <div class="photo-caption">Historical record</div>
-        </div>
-        <div class="photo-item">
-          <img src="https://myfunrun.nyc3.cdn.digitaloceanspaces.com/assets/site/album/2803/-2803.9504ea96-aa8f-4446-bbab-719eecb833ee.jpg" alt="Historical photo" loading="lazy">
-          <div class="photo-caption">Historical record</div>
-        </div>
-        <div class="photo-item">
-          <img src="https://myfunrun.nyc3.cdn.digitaloceanspaces.com/assets/site/album/2803/-2803.9a67c4a4-f9bf-4706-b84d-ba0da9547918.jpg" alt="Historical photo" loading="lazy">
-          <div class="photo-caption">Historical record</div>
+      </div>
+      <div class="photo-carousel-wrap reveal">
+        <div class="photo-carousel">
+          <div class="photo-item"><img src="https://myfunrun.nyc3.cdn.digitaloceanspaces.com/assets/site/album/2803/-2803.758be714-4e34-479b-8e0f-acabe18968f3.jpg" alt="Radnor Township School #7" loading="lazy"><div class="photo-caption">Radnor Township School #7, the original schoolhouse</div></div>
+          <div class="photo-item"><img src="https://myfunrun.nyc3.cdn.digitaloceanspaces.com/assets/site/album/2803/-2803.93acecea-74ab-4b51-b1e5-f9d92da1a2de.jpg" alt="Historical photo" loading="lazy"><div class="photo-caption">Historical record</div></div>
+          <div class="photo-item"><img src="https://myfunrun.nyc3.cdn.digitaloceanspaces.com/assets/site/album/2803/-2803.9504ea96-aa8f-4446-bbab-719eecb833ee.jpg" alt="Historical photo" loading="lazy"><div class="photo-caption">Historical record</div></div>
+          <div class="photo-item"><img src="https://myfunrun.nyc3.cdn.digitaloceanspaces.com/assets/site/album/2803/-2803.9a67c4a4-f9bf-4706-b84d-ba0da9547918.jpg" alt="Historical photo" loading="lazy"><div class="photo-caption">Historical record</div></div>
         </div>
       </div>
 
-      <p class="photos-album-label reveal">Cabin Construction &amp; Renovation</p>
-      <div class="photo-grid reveal">
-        <div class="photo-item">
-          <img src="https://myfunrun.nyc3.cdn.digitaloceanspaces.com/assets/site/album/2801/-2801.38f2f7b6-acaf-4fc5-a57c-c006c47b161d.jpg" alt="Preconstruction" loading="lazy">
-          <div class="photo-caption">Preconstruction</div>
+      <div class="photos-album-label reveal" style="margin-top:2.5rem">
+        Cabin Construction &amp; Renovation
+        <div class="carousel-nav">
+          <button class="carousel-btn" onclick="carouselPrev(this)">&#8592;</button>
+          <button class="carousel-btn" onclick="carouselNext(this)">&#8594;</button>
         </div>
-        <div class="photo-item">
-          <img src="https://myfunrun.nyc3.cdn.digitaloceanspaces.com/assets/site/album/2801/-2801.8e5a45e1-61ac-41e7-87f5-842f53d170ce.jpg" alt="Pre-construction" loading="lazy">
-          <div class="photo-caption">Pre-construction</div>
-        </div>
-        <div class="photo-item">
-          <img src="https://myfunrun.nyc3.cdn.digitaloceanspaces.com/assets/site/album/2801/-2801.84ec54d9-5ff5-437c-8c9b-777153176c0c.jpg" alt="Outside entrance to basement from inside, basement has been dug out." loading="lazy">
-          <div class="photo-caption">Basement excavated for new flexible meeting space</div>
-        </div>
-        <div class="photo-item">
-          <img src="https://myfunrun.nyc3.cdn.digitaloceanspaces.com/assets/site/album/2801/-2801.acf3920f-aa09-4378-bc00-ff5e677cdee9.jpg" alt="New outside entrance to basement stairs formed up." loading="lazy">
-          <div class="photo-caption">New Bilco door entrance to basement</div>
-        </div>
-        <div class="photo-item">
-          <img src="https://myfunrun.nyc3.cdn.digitaloceanspaces.com/assets/site/album/2801/-2801.d49b15b6-7490-4f90-888d-c6a12ef228e0.jpg" alt="Footers being poured" loading="lazy">
-          <div class="photo-caption">Footers being poured</div>
-        </div>
-        <div class="photo-item">
-          <img src="https://myfunrun.nyc3.cdn.digitaloceanspaces.com/assets/site/album/2801/-2801.4faac832-19be-4119-8b01-c5469b52fefd.jpg" alt="Porch and Quartermaster's Shed" loading="lazy">
-          <div class="photo-caption">New porch &amp; Quartermaster's Shed</div>
-        </div>
-        <div class="photo-item">
-          <img src="https://myfunrun.nyc3.cdn.digitaloceanspaces.com/assets/site/album/2801/-2801.04c69bf8-645d-4423-92bb-31d2fc86bb61.jpg" alt="QM shed progress" loading="lazy">
-          <div class="photo-caption">QM shed in progress</div>
-        </div>
-        <div class="photo-item">
-          <img src="https://myfunrun.nyc3.cdn.digitaloceanspaces.com/assets/site/album/2801/-2801.6d0529db-9ce0-464a-a85f-615f8ae69b27.jpg" alt="New outside entrance to basement" loading="lazy">
-          <div class="photo-caption">New outside entrance to basement</div>
+      </div>
+      <div class="photo-carousel-wrap reveal">
+        <div class="photo-carousel">
+          <div class="photo-item"><img src="https://myfunrun.nyc3.cdn.digitaloceanspaces.com/assets/site/album/2801/-2801.38f2f7b6-acaf-4fc5-a57c-c006c47b161d.jpg" alt="Preconstruction" loading="lazy"><div class="photo-caption">Preconstruction</div></div>
+          <div class="photo-item"><img src="https://myfunrun.nyc3.cdn.digitaloceanspaces.com/assets/site/album/2801/-2801.8e5a45e1-61ac-41e7-87f5-842f53d170ce.jpg" alt="Pre-construction" loading="lazy"><div class="photo-caption">Pre-construction</div></div>
+          <div class="photo-item"><img src="https://myfunrun.nyc3.cdn.digitaloceanspaces.com/assets/site/album/2801/-2801.84ec54d9-5ff5-437c-8c9b-777153176c0c.jpg" alt="Basement excavated" loading="lazy"><div class="photo-caption">Basement excavated for new flexible meeting space</div></div>
+          <div class="photo-item"><img src="https://myfunrun.nyc3.cdn.digitaloceanspaces.com/assets/site/album/2801/-2801.acf3920f-aa09-4378-bc00-ff5e677cdee9.jpg" alt="New Bilco door" loading="lazy"><div class="photo-caption">New Bilco door entrance to basement</div></div>
+          <div class="photo-item"><img src="https://myfunrun.nyc3.cdn.digitaloceanspaces.com/assets/site/album/2801/-2801.d49b15b6-7490-4f90-888d-c6a12ef228e0.jpg" alt="Footers being poured" loading="lazy"><div class="photo-caption">Footers being poured</div></div>
+          <div class="photo-item"><img src="https://myfunrun.nyc3.cdn.digitaloceanspaces.com/assets/site/album/2801/-2801.4faac832-19be-4119-8b01-c5469b52fefd.jpg" alt="Porch and QM Shed" loading="lazy"><div class="photo-caption">New porch &amp; Quartermaster's Shed</div></div>
+          <div class="photo-item"><img src="https://myfunrun.nyc3.cdn.digitaloceanspaces.com/assets/site/album/2801/-2801.04c69bf8-645d-4423-92bb-31d2fc86bb61.jpg" alt="QM shed progress" loading="lazy"><div class="photo-caption">QM shed in progress</div></div>
+          <div class="photo-item"><img src="https://myfunrun.nyc3.cdn.digitaloceanspaces.com/assets/site/album/2801/-2801.6d0529db-9ce0-464a-a85f-615f8ae69b27.jpg" alt="New outside entrance" loading="lazy"><div class="photo-caption">New outside entrance to basement</div></div>
         </div>
       </div>
 
-      <p class="photos-album-label reveal">Views We Never Had Before</p>
-      <div class="photo-grid historical reveal">
-        <div class="photo-item">
-          <img src="https://myfunrun.nyc3.cdn.digitaloceanspaces.com/assets/site/album/2802/-2802.a95af2a1-6ae2-45e6-9c12-c790a396daf7.jpg" alt="Aerial view" loading="lazy">
-          <div class="photo-caption">Views we never had before</div>
+      <div class="photos-album-label reveal" style="margin-top:2.5rem">
+        Views We Never Had Before
+        <div class="carousel-nav">
+          <button class="carousel-btn" onclick="carouselPrev(this)">&#8592;</button>
+          <button class="carousel-btn" onclick="carouselNext(this)">&#8594;</button>
         </div>
-        <div class="photo-item">
-          <img src="https://myfunrun.nyc3.cdn.digitaloceanspaces.com/assets/site/album/2802/-2802.e51dd97c-0cf4-46ab-8da1-e7f26d19e21a.jpg" alt="Aerial view" loading="lazy">
-          <div class="photo-caption">Views we never had before</div>
-        </div>
-        <div class="photo-item">
-          <img src="https://myfunrun.nyc3.cdn.digitaloceanspaces.com/assets/site/album/2802/-2802.b1150dda-351a-4651-8056-f94c6f9345d8.jpg" alt="Aerial view" loading="lazy">
-          <div class="photo-caption">Views we never had before</div>
+      </div>
+      <div class="photo-carousel-wrap reveal">
+        <div class="photo-carousel">
+          <div class="photo-item"><img src="https://myfunrun.nyc3.cdn.digitaloceanspaces.com/assets/site/album/2802/-2802.a95af2a1-6ae2-45e6-9c12-c790a396daf7.jpg" alt="Aerial view" loading="lazy"><div class="photo-caption">Aerial view</div></div>
+          <div class="photo-item"><img src="https://myfunrun.nyc3.cdn.digitaloceanspaces.com/assets/site/album/2802/-2802.e51dd97c-0cf4-46ab-8da1-e7f26d19e21a.jpg" alt="Aerial view" loading="lazy"><div class="photo-caption">Aerial view</div></div>
+          <div class="photo-item"><img src="https://myfunrun.nyc3.cdn.digitaloceanspaces.com/assets/site/album/2802/-2802.b1150dda-351a-4651-8056-f94c6f9345d8.jpg" alt="Aerial view" loading="lazy"><div class="photo-caption">Aerial view</div></div>
         </div>
       </div>
     </div>
@@ -1751,7 +1773,8 @@
   <!-- DONATE -->
   <section id="donate">
     <div class="donate-inner">
-      <div class="donate-text reveal">
+
+      <div class="donate-header reveal">
         <p class="section-label">Give Today</p>
         <h2 class="section-title">Help preserve this place<br><em>for the next generation.</em></h2>
         <p>
@@ -1764,44 +1787,45 @@
           and neighbors have collectively raised nearly half of our original $1 million goal.
           <strong>We are still building.</strong>
         </p>
-        <p>
-          You can donate online through our secure portal, or mail a check directly.
-          Mailing your check ensures 100% of your contribution goes to the Cabin and Land fund.
-        </p>
-        <div class="plan-2030">
-          <p class="plan-2030-label">Our Path to 2030</p>
-          <p class="plan-2030-title">A perpetual endowment by 2030.</p>
-          <p>
-            Friends of Radnor 284 has secured the property and completed the renovation. Our focus now is building an endowment that makes this work permanent. By 2030, we intend for FOR284 to have the financial footing to support Scouting in Radnor Township indefinitely, covering property upkeep, summer camperships for Scouts who need them, Eagle Project funding, and the preservation of the open space this troop has called home for over a century. Troop 284 has averaged four Eagle Scouts a year for generations. That record is worth protecting.
-          </p>
-        </div>
-        <div class="donate-actions">
-          <a class="donate-btn" href="https://for284.org/donate" target="_blank" rel="noopener">
-            Donate Online
-          </a>
-        </div>
       </div>
 
-      <div class="donate-card reveal">
-        <p class="donate-card-title">Donate by Mail</p>
-        <p class="donate-card-detail">
-          Make your check payable to <strong>Friends of Radnor 284</strong> and mail it to our PO Box.
-          Mailing your donation ensures that the full amount of your tax-deductible gift goes to the
-          Cabin and Land fund with no processing fees deducted.
+      <div class="plan-2030 reveal">
+        <p class="plan-2030-label">Our Path to 2030</p>
+        <p class="plan-2030-title">A perpetual endowment by 2030.</p>
+        <p>
+          Friends of Radnor 284 has secured the property and completed the renovation. Our focus now is building an endowment that makes this work permanent. By 2030, we intend for FOR284 to have the financial footing to support Scouting in Radnor Township indefinitely, covering property upkeep, summer camperships for Scouts who need them, Eagle Project funding, and the preservation of the open space this troop has called home for over a century. Troop 284 has averaged four Eagle Scouts a year for generations. That record is worth protecting.
         </p>
-        <div class="donate-address">
-          <div class="addr-line">
+      </div>
+
+      <div class="donate-options reveal">
+        <div class="donate-option">
+          <p class="donate-option-label">Give Online</p>
+          <p class="donate-option-title">Donate securely online.</p>
+          <p>
+            Make a contribution through our secure portal. Selecting the option to cover processing fees ensures the full amount reaches the Cabin and Land fund.
+          </p>
+          <a class="donate-btn" href="https://for284.org/donate" target="_blank" rel="noopener">Donate Online</a>
+        </div>
+
+        <div class="donate-option">
+          <p class="donate-option-label">Give by Mail</p>
+          <p class="donate-option-title">Send a check directly.</p>
+          <p>
+            Make your check payable to <strong>Friends of Radnor 284</strong> and mail to our PO Box. Mailing your donation ensures the full amount reaches the Cabin and Land fund with no fees deducted.
+          </p>
+          <div class="donate-address">
             <strong>Mailing Address</strong>
             Friends of Radnor 284<br>
             PO Box 142<br>
             Wayne, PA 19087
           </div>
+          <p class="tax-note">
+            Friends of Radnor Troop 284 is a registered nonprofit under IRS Code Section 501(c)(3).
+            All donations are fully tax-deductible.
+          </p>
         </div>
-        <p class="tax-note">
-          Friends of Radnor Troop 284 is a registered nonprofit under IRS Code Section 501(c)(3).
-          All donations are tax-deductible to the full extent permitted by law.
-        </p>
       </div>
+
     </div>
   </section>
 
@@ -1832,6 +1856,18 @@
     window.goTo = (id) => {
       const el = document.getElementById(id);
       if (el) el.scrollIntoView({ behavior: 'smooth' });
+    };
+
+    // Carousel navigation
+    window.carouselPrev = (btn) => {
+      const carousel = btn.closest('.photos-album-label').nextElementSibling.querySelector('.photo-carousel');
+      const itemW = carousel.querySelector('.photo-item').offsetWidth + 6;
+      carousel.scrollBy({ left: -itemW * 4, behavior: 'smooth' });
+    };
+    window.carouselNext = (btn) => {
+      const carousel = btn.closest('.photos-album-label').nextElementSibling.querySelector('.photo-carousel');
+      const itemW = carousel.querySelector('.photo-item').offsetWidth + 6;
+      carousel.scrollBy({ left: itemW * 4, behavior: 'smooth' });
     };
 
     // Active nav link on scroll
