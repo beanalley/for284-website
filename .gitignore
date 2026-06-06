@@ -1,2 +1,2 @@
-.playwright-mcp/
-*.png
+_scratch/
+.DS_Store
